@@ -1,5 +1,6 @@
 import InputSection from "./Components/InputSection";
 import IndivInput from "./Components/IndivInput";
+import Results from "./Components/Results";
 import { useState } from "react";
 
 // const inputSections = [
@@ -40,6 +41,13 @@ function App() {
         value: 1000,
     }
   ]);
+
+  const trialResultsObj = {
+    initialInvestment: 10,
+    annualInvestment: 100,
+    expectedReturn: 1000,
+    duration: 1,
+  }
   
   function handleInputValueChange(label, newVal){
     // setInputSections(event.target.value)
@@ -69,6 +77,9 @@ function App() {
           onValChange={handleInputValueChange}
         />
         ))}
+      </div>
+      <div>
+        <Results userInput={trialResultsObj} />
       </div>
 
     </div>
