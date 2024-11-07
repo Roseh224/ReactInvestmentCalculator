@@ -1,17 +1,19 @@
 import { useState } from "react";
 
-export default function IndivInput(props) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [content, setContent] = useState(props.default);
+export default function IndivInput({label, val, onValChange}) {
+const [content, setContent] = useState(val);
 
   function handleChange(event) {
     setContent(event.target.value);
+    // console.log(`inside of IndivInput's handleChange: ${content}`);
+    onValChange(label, content); //is two behind right now. 
   }
 
   return (
     <span>
-      <label>{props.label}</label>
+      <label>{label}</label>
       <input type="text" value={content} onChange={handleChange} />
+      {/* <input type="text" value={val} onChange={onValChange} /> */}
     </span>
   );
 }

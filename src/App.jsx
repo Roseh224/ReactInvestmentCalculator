@@ -1,17 +1,76 @@
 import InputSection from "./Components/InputSection";
-import { INPUT_SECTIONS } from "./constants";
+import IndivInput from "./Components/IndivInput";
+import { useState } from "react";
+
+// const inputSections = [
+//   {
+//       label: "Initial Investment",
+//       value: 0
+//   },
+//   {
+//       label: "Annual Investment",
+//       value: 10,
+//   },
+//   {
+//       label: "Expected Return",
+//       value: 100,
+//   },
+//   {
+//       label: "Duration",
+//       value: 1000,
+//   }
+// ]
 
 function App() {
+  const [inputSections, setInputSections] = useState([
+    {
+        label: "Initial Investment",
+        value: 0
+    },
+    {
+        label: "Annual Investment",
+        value: 10,
+    },
+    {
+        label: "Expected Return",
+        value: 100,
+    },
+    {
+        label: "Duration",
+        value: 1000,
+    }
+  ]);
+  
+  function handleInputValueChange(label, newVal){
+    // setInputSections(event.target.value)
+    setInputSections(prevSections =>
+      prevSections.map(section =>
+        section.label === label
+          ? { ...section, value: newVal }
+          : section
+      )
+    );
+      console.log(inputSections);
+  };
+
   return (
     <div>
       <header id="header">
         <img src="/investment-calculator-logo.png" />
         <h1>React Investment Calculator</h1>
       </ header>
-      <div className="input-group">
-        <InputSection sections={INPUT_SECTIONS} />
-        {/* <InputBox label="number1" defaultVal="A val one" /> */}
+
+      <div id="user-input">
+        {inputSections.map((indivSection) => (
+          <IndivInput 
+          key={indivSection.label} 
+          label={indivSection.label} 
+          val={indivSection.value} 
+          onValChange={handleInputValueChange}
+        />
+        ))}
       </div>
+
     </div>
   );
 }
